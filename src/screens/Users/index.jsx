@@ -2,7 +2,7 @@ import { View } from "react-native";
 import axios from "axios";
 import styles from "./styles";
 import Title from "../../components/Title";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
@@ -15,6 +15,10 @@ export default function Users() {
       console.error(error);
     }
   }
+  useEffect(() => {
+    getUsers();
+  }, []);
+
   return (
     <View style={styles.container}>
       <Title title="Usuários" />
