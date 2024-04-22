@@ -24,6 +24,19 @@ export default function Users() {
   return (
     <View style={styles.container}>
       <Title title="Usuários" />
+      {users ? (
+          users.map((user) => (
+        
+              <View key={user.id} syle={styles.user}>
+                <Title title={user.name} />
+                <Title title={user.email} />
+              </View>
+          
+          )
+        )) : (
+          <Title title="Carregando..." />
+        )}
+        
     </View>
   );
 }
