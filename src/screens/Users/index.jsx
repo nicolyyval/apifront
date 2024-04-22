@@ -19,6 +19,8 @@ export default function Users() {
     getUsers();
   }, []);
 
+  console.log(users);
+
   return (
     <View style={styles.container}>
       <Title title="Usuários" />
