@@ -3,6 +3,7 @@ import axios from "axios";
 import styles from "./styles";
 import Title from "../../components/Title";
 import { useEffect, useState } from "react";
+import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
@@ -36,7 +37,27 @@ export default function Users() {
         )) : (
           <Title title="Carregando..." />
         )}
-        
+        <TouchableOpacity onPress={getUsers} style={styles.button}>
+          <Text style={styles.buttonText}>Recarregar</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={createUser} style={styles.button}>
+          <Text style={styles.buttonText}>Criar usuário</Text>
+        </TouchableOpacity>
     </View>
   );
 }
+
+const createUser = async () => {
+  try {
+    const response = await axios.post(`${apiURL}/users`, {
+      name: "Nicoly Val",
+      email: "nicolyval98@gmail.com",
+      password: "oumaigodi",
+    });
+    console.log(response.data.user);
+    getUsers();
+  } catch (error) {
+    console.error(error);
+  }
+};
